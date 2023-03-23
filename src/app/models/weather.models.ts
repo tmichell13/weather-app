@@ -1,5 +1,6 @@
 export interface WeatherData {
     currentConditions: currentConditions
+    address: string
 }
 
 export interface currentConditions {

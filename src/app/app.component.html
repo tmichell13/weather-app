@@ -1,10 +1,21 @@
-<div class="container">
+<div class="search">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <input 
+      type="text" 
+      placeholder="Search City/ZIP"
+      name="city"
+      [(ngModel)]="cityName"
+    />
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
   <div class="upper-data">
-    <img src="../assets/warm.webp" *ngIf="14 > 15"/>
-    <img src="../assets/cold.png" *ngIf="14 <= 15"/>
+    <img src="../assets/warm.webp" *ngIf="weatherData.currentConditions.temp > 50"/>
+    <img src="../assets/cold.png" *ngIf="weatherData.currentConditions.temp <= 50"/>
     <div class="weather-data">
-      <div class="location">Grand Rapids</div>
-      <div class="temp">{{ 39.9 | number: '1.0-0'}}°</div>
+      <div class="location">{{ weatherData.address }}</div>
+      <div class="temp">{{ weatherData.currentConditions.temp | number: '1.0-0'}}°</div>
     </div>
   </div>
   <div class="lower-data">
@@ -14,34 +25,34 @@
     <div class="more-info-container">
       <div class="info-block">
         <div class="info-block-value">
-          10°
+          {{ weatherData.currentConditions.precip }} <em>%</em>
         </div>
         <div class="info-block-label">
-          <span>min:</span>
+          <span>Precipitation:</span>
         </div>
       </div>
       <div class="info-block">
         <div class="info-block-value">
-          50°
+          {{ weatherData.currentConditions.visibility }} <em>mi</em>
         </div>
         <div class="info-block-label">
-          <span>max:</span>
+          <span>Visibility:</span>
         </div>
       </div>
       <div class="info-block">
         <div class="info-block-value">
-          5%
+          {{ weatherData.currentConditions.humidity }} <em>%</em>
         </div>
         <div class="info-block-label">
-          <span>humidity:</span>
+          <span>Humidity:</span>
         </div>
       </div>
       <div class="info-block">
         <div class="info-block-value">
-          15mph
+          {{ weatherData.currentConditions.windspeed }} <em>mph</em>
         </div>
         <div class="info-block-label">
-          <span>wind:</span>
+          <span>Wind:</span>
         </div>
       </div>
     </div>
